@@ -9,7 +9,7 @@ use Illuminate\Database\Exceptions\JsonEncodingException;
 use Illuminate\Database\Eloquent\Interfaces\Jsonable;
 use Illuminate\Database\Eloquent\Interfaces\Arrayable;
 use Illuminate\Support\Contracts\ModelInterface;
-
+use Illuminate\Database\Query\Builder as QueryBuilder;
 abstract class Model implements ModelInterface, Jsonable, JsonSerializable
 {
     use Concerns\HasAttributes,
@@ -406,15 +406,30 @@ abstract class Model implements ModelInterface, Jsonable, JsonSerializable
         // TODO: Implement save() method.
         return $this->setLastInsertId($this->db->insert($attributes)->insert_id());
     }
-    public function find($id)
-    {
-        // TODO: Implement find() method.
-    }
+//    public function find($id)
+//    {
+//        // TODO: Implement find() method.
+//    }
     public function lastInsertId()
     {
         // TODO: Implement lastInsertId() method.
         return $this->lastInsertId;
     }
+
+    public function get($params, $limit = null, $offset = null)
+    {
+        // TODO: Implement lastInsertId() method.
+        return $this->db->get_where($this->table, $params, ($limit) ? $limit : null, ($offset) ? $offset : null);
+    }
+    public function update(array $attributes)
+    {
+        // TODO: Implement lastInsertId() method.
+        
+    }
+
+
+
+
 
 
 }
